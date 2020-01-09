@@ -33,6 +33,7 @@
     "extra": {
         "handle": "mailchimp",
         "name": "Mailchimp",
-        "description": "Subscrube users to Mailchimp lists"
+        "description": "Subscribe users to Mailchimp lists",
+        "documentationUrl": "https://github.com/boundstate/craft-mailchimp/blob/master/README.md"
     }
 }
