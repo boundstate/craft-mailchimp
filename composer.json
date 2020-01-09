@@ -1,0 +1,38 @@
+{
+    "name": "boundstate/craft-mailchimp",
+    "description": "Subscribe users to Mailchimp lists in Craft CMS",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "mailchimp"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bound State Software",
+            "homepage": "https://boundstatesoftware.com"
+        }
+    ],
+    "support": {
+        "docs": "https://github.com/boundstate/craft-mailchimp/blob/master/README.md",
+        "issues": "https://github.com/boundstate/craft-mailchimp/issues"
+    },
+    "require": {
+        "craftcms/cms": "^3.0.0",
+        "drewm/mailchimp-api": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+          "boundstate\\mailchimp\\": "src/"
+        }
+    },
+    "extra": {
+        "handle": "mailchimp",
+        "name": "Mailchimp",
+        "description": "Subscrube users to Mailchimp lists"
+    }
+}

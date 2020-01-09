@@ -1,0 +1,29 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    first: true,
+    label: "Mailchimp API Key",
+    required: true,
+    name: 'apiKey',
+    value: settings.apiKey,
+    suggestEnvVars: true,
+    errors: settings.getErrors('apiKey')
+}) }}
+
+{{ forms.textField({
+    label: "Mailchimp Audience ID",
+    name: 'audienceId',
+    instructions: "The default list ID to subscribe users to if the form doesn’t specify one."|t('mailchimp'),
+    value: settings.audienceId,
+    suggestEnvVars: true,
+    errors: settings.getErrors('audienceId')
+}) }}
+
+{{ forms.textField({
+    label: "Success Flash Message"|t('mailchimp'),
+    required: true,
+    name: 'successFlashMessage',
+    instructions: "The flash message displayed after successfully subscribing."|t('mailchimp'),
+    value: settings.successFlashMessage,
+    errors: settings.getErrors('successFlashMessage')
+}) }}
