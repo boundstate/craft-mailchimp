@@ -25,7 +25,6 @@ class SubscribeController extends Controller
         $this->requirePostRequest();
 
         $request = Craft::$app->getRequest();
-        $urlManager = Craft::$app->getUrlManager();
         $plugin = Plugin::getInstance();
         $settings = $plugin->getSettings();
 
