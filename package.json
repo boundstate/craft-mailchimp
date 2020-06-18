@@ -1,0 +1,14 @@
+{
+  "name": "craft-mailchimp",
+  "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boundstate/craft-mailchimp.git"
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "devDependencies": {
+    "standard-version": "^8.0.0"
+  }
+}
