@@ -46,7 +46,7 @@ class ApiError extends Model
         $apiError->status = $result['status'];
         $apiError->detail = $result['detail'];
         $apiError->instance = $result['instance'];
-        $apiError->errors = $result['errors'] ?: [];
+        $apiError->errors = $result['errors'] ?? [];
 
         return $apiError;
     }

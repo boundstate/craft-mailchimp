@@ -45,8 +45,8 @@ class Mailchimp extends Component
         $result = $this->addListMember($subscription->listId, $subscription->email, [
             'email_address' => $subscription->email,
             'status' => 'subscribed',
-            'merge_fields' => $subscription->mergeFields ?: new \stdClass(),
-            'tags' => $subscription->tags ?: [],
+            'merge_fields' => $subscription->mergeFields ?? new \stdClass(),
+            'tags' => $subscription->tags ?? [],
         ]);
 
         if ($result && $subscription->tags) {
