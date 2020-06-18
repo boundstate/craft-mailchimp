@@ -36,7 +36,10 @@ class SubscribeController extends Controller
 
         if (!$plugin->mailchimp->subscribe($subscription)) {
             if ($request->getAcceptsJson()) {
-                return $this->asJson(['errors' => $subscription->getErrors()]);
+                return $this->asJson([
+                    'apiError' => $subscription->apiError,
+                    'errors' => $subscription->getErrors(),
+                ]);
             }
 
             Craft::$app->getSession()->setError(Craft::t('mailchimp', 'There was a problem with your submission, please check the form and try again!'));
