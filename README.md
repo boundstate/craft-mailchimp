@@ -1,4 +1,4 @@
-# Mailchimp plugin for Craft CMS 3.x
+# Mailchimp plugin for Craft CMS 4.x
 
 Subscribe users to Mailchimp lists in Craft CMS
 
