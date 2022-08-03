@@ -6,25 +6,11 @@ use craft\base\Model;
 
 class Settings extends Model
 {
-    /**
-     * @var string Mailchimp API key
-     */
-    public $apiKey;
+    public string $apiKey = '';
+    public string $audienceId = '';
+    public ?string $successFlashMessage = null;
 
-    /**
-     * @var string Audience ID
-     */
-    public $audienceId;
-
-    /**
-     * @var string|null
-     */
-    public $successFlashMessage;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -33,9 +19,6 @@ class Settings extends Model
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules(): array
     {
         return [

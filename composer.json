@@ -17,12 +17,16 @@
         }
     ],
     "support": {
-        "docs": "https://github.com/boundstate/craft-mailchimp/blob/master/README.md",
+        "docs": "https://github.com/boundstate/craft-mailchimp",
         "issues": "https://github.com/boundstate/craft-mailchimp/issues"
     },
     "require": {
-        "craftcms/cms": "^3.0.0",
+        "php": "^8.0.2",
+        "craftcms/cms": "^4.0.0",
         "drewm/mailchimp-api": "^2.5"
+    },
+    "require-dev": {
+        "craftcms/rector": "dev-main"
     },
     "autoload": {
         "psr-4": {
@@ -34,5 +38,15 @@
         "name": "Mailchimp",
         "description": "Subscribe users to Mailchimp lists",
         "documentationUrl": "https://github.com/boundstate/craft-mailchimp/blob/master/README.md"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.2"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
     }
 }

@@ -5,22 +5,21 @@ use boundstate\mailchimp\models\Subscription;
 use boundstate\mailchimp\Plugin;
 
 use Craft;
+use craft\errors\MissingComponentException;
 use craft\web\Controller;
+use yii\web\BadRequestHttpException;
 use yii\web\Response;
 
 class SubscribeController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    protected $allowAnonymous = true;
+    protected int|bool|array $allowAnonymous = true;
 
     /**
      * Subscribes a member to a MailChimp list.
-     * 
-     * @return Response|null
+     * @throws MissingComponentException
+     * @throws BadRequestHttpException
      */
-    public function actionIndex()
+    public function actionIndex(): ?Response
     {
         $this->requirePostRequest();
 

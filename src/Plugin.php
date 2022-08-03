@@ -1,36 +1,31 @@
 <?php
 namespace boundstate\mailchimp;
 
+use boundstate\mailchimp\models\Settings;
+use boundstate\mailchimp\services\Mailchimp;
+
 use Craft;
+use craft\base\Model;
 
 class Plugin extends \craft\base\Plugin
 {
-    /**
-     * @inheritdoc
-     */
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
     public function init()
     {
         parent::init();
 
         $this->setComponents([
-            'mailchimp' => \boundstate\mailchimp\services\Mailchimp::class,
+            'mailchimp' => Mailchimp::class,
         ]);
     }
 
-    /**
-     * @inheritdoc
-     */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
-        return new \boundstate\mailchimp\models\Settings();
+        return new Settings();
     }
 
-    /**
-     * @inheritdoc
-     */
-    protected function settingsHtml()
+    protected function settingsHtml(): ?string
     {
         // Get and pre-validate the settings
         $settings = $this->getSettings();

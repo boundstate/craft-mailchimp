@@ -6,44 +6,19 @@ use craft\base\Model;
 
 class Subscription extends Model
 {
-    /**
-     * @var string|null
-     */
-    public $listId;
+    public ?string $listId = null;
+    public ?string $email = null;
+    public ?array $mergeFields = null;
+    public ?array $tags = null;
+    public ?ApiError $apiError = null;
 
-    /**
-     * @var string|null
-     */
-    public $email;
-
-    /**
-     * @var array|null
-     */
-    public $mergeFields;
-
-    /**
-     * @var string[]|null
-     */
-    public $tags;
-
-    /**
-     * @var ApiError|null
-     */
-    public $apiError;
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'email' => Craft::t('mailchimp', 'Your Email'),
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function rules(): array
     {
         return [

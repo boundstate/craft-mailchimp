@@ -7,23 +7,18 @@ use boundstate\mailchimp\Plugin;
 
 use Craft;
 use craft\base\Component;
-
+use craft\helpers\App;
 use DrewM\MailChimp\MailChimp as MailchimpClient;
+use yii\base\InvalidConfigException;
 
 class Mailchimp extends Component
 {
-    /**
-     * @var MailchimpClient
-     */
-    private $client;
+    private ?MailchimpClient $client = null;
 
     /**
      * Subscribes a member to a list.
      * Adds any tags to the member if they already exist.
-     * 
-     * @param Subscription $subscription
      * @throws InvalidConfigException if the plugin settings don't validate
-     * @return bool
      */
     public function subscribe(Subscription $subscription): bool
     {
@@ -34,7 +29,7 @@ class Mailchimp extends Component
         }
 
         if (!$subscription->listId) {
-            $subscription->listId = Craft::parseEnv($settings->audienceId);
+            $subscription->listId = App::parseEnv($settings->audienceId);
         }
 
         if (!$subscription->validate()) {
@@ -50,7 +45,7 @@ class Mailchimp extends Component
         ]);
 
         if ($result && $subscription->tags) {
-            // in case list member already exists, add tags with additional API 
+            // in case list member already exists, add tags with additional API
             $this->addListMemberTags($subscription->listId, $subscription->email, $subscription->tags);
         }
 
@@ -69,13 +64,8 @@ class Mailchimp extends Component
 
     /**
      * Adds a member to a list.
-     * 
-     * @param string $listId
-     * @param string $email
-     * @param array $options
-     * @return array
      */
-    private function addListMember($listId, $email, $options)
+    private function addListMember(string $listId, string $email, ?array $options): array
     {
         $subscriberHash = MailchimpClient::subscriberHash($email);
         return $this->getClient()->put("lists/$listId/members/$email", $options);
@@ -83,46 +73,39 @@ class Mailchimp extends Component
 
     /**
      * Adds tags to a list member.
-     * 
+     *
      * @param string $listId
      * @param string $email
      * @param string[] $tags
-     * @return array
+     * @return void
      */
-    private function addListMemberTags($listId, $email, $tags)
+    private function addListMemberTags(string $listId, string $email, array $tags): void
     {
         $subscriberHash = MailchimpClient::subscriberHash($email);
-        return $this->getClient()->post("lists/$listId/members/$email/tags", [
+        $this->getClient()->post("lists/$listId/members/$email/tags", [
             'tags' => $this->encodeTagsToAdd($tags),
         ]);
     }
 
-    /**
-     * @return MailchimpClient
-     */
     private function getClient(): MailchimpClient {
         $settings = Plugin::getInstance()->getSettings();
 
         if (!$this->client) {
-            $apiKey = Craft::parseEnv($settings->apiKey);
+            $apiKey = App::parseEnv($settings->apiKey);
             $this->client = new MailchimpClient($apiKey);
         }
 
         return $this->client;
     }
 
-    /**
-     * @param string[] $tags
-     * @return array
-     */
-    private function encodeTagsToAdd($tags): array
+    private function encodeTagsToAdd(array $tags): array
     {
         $result = [];
-        
+
         foreach ($tags as $tag) {
             $result[] = ['name' => $tag, 'status' => 'active'];
         }
-    
+
         return $result;
     }
 }
